@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>Rock, paper, scissors game!</h1>
+
+<p id="game-update"></p>
+<p style="color: green; font-weight: bold;" id="game-result"></p>
+
+<button onClick="window.location.reload();">Play again!</button>
+
+<script>
+
+// Hardcoded user choice
+var userPrompt = prompt("Rock, paper, or scissors?");
+var userInput = userPrompt.toLowerCase();
+var user = userInput.charAt(0);
+
+// General game options
+var game = ["r", "s", "p"]
+
+// Random number between 0 and 2 to choose from game options
+var num = Math.floor(Math.random() * 3);
+
+// Computer choice (random number as index of game choices)
+var computer = game[num];
+
+// Logging user choice and computer choice
+document.getElementById("game-update").innerHTML = `You chose: ${user}, Computer chose: ${computer}`;
+
+// Logging game result
+if (user == "r" && computer == "r" || user == "p" && computer == "p" || user == "s" && computer == "s"){
+    document.getElementById("game-result").innerHTML = "Nobody wins, it's a tie!"
+} else if (user == "r" && computer == "s" || user == "p" && computer == "r" || user == "s" && computer == "p" ){
+    document.getElementById("game-result").innerHTML = "You win!"
+} else if (user == "r" && computer == "p" || user == "p" && computer == "s" || user == "s" && computer == "r"){
+    document.getElementById("game-result").innerHTML = "Computer wins!"
+}
+
+</script>
+
+</body>
+</html>
