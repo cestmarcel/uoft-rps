@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 
-<h1>Rock, paper, scissors game!</h1>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Rock, paper, scissors</a>
+    </nav>
 
-<p id="game-update"></p>
-<p style="color: green; font-weight: bold;" id="game-result"></p>
+<div style="height: 30px;"></div>
 
-<button onClick="window.location.reload();">Play again!</button>
+<div class="container">
+    <h1>Let's play rock, paper, scissors!</h1>
+
+    <p id="game-update"></p>
+    <p style="color: green; font-weight: bold;" id="game-result"></p>
+
+    <button class="button btn-secondary p-2" style="border-radius:5px;" onClick="window.location.reload();">Play again!</button>
+</div>
 
 <script>
 
-// Hardcoded user choice
-var userPrompt = prompt("Rock, paper, or scissors?");
-var userInput = userPrompt.toLowerCase();
-var user = userInput.charAt(0);
+// User choice
+var userPrompt = prompt("Rock, paper, or scissors? You can also type r, p, or s.");
+var user = userPrompt.toLowerCase().charAt(0);
 
 // General game options
-var game = ["r", "s", "p"]
+var game = ["r", "s", "p"];
 
 // Random number between 0 and 2 to choose from game options
 var num = Math.floor(Math.random() * 3);
@@ -30,16 +38,43 @@ var num = Math.floor(Math.random() * 3);
 // Computer choice (random number as index of game choices)
 var computer = game[num];
 
+// Generating expression for computer's choice
+if (computer == "r") {
+    var computerChoice = "Rock";
+} else if (computer == "p") {
+    var computerChoice = "Paper";
+} else if (computer == "s") {
+    var computerChoice = "Scissors";
+}
+
+// Generating readable expression in case user types single character
+if (user == "r" || user == "R") {
+    var userChoice = "Rock";
+} else if (user == "p" || user == "P") {
+    var userChoice = "Paper";
+} else if (user == "s" || user == "S") {
+    var userChoice = "Scissors";
+} else {
+    userChoice == user;
+}
+
 // Logging user choice and computer choice
-document.getElementById("game-update").innerHTML = `You chose: ${user}, Computer chose: ${computer}`;
+document.getElementById("game-update").innerHTML = `You chose: ${userChoice}, Computer chose: ${computerChoice}`;
+
+// Defining a function for logging the result
+function logResult (result) {
+    document.getElementById("game-result").innerHTML = result;
+}
 
 // Logging game result
 if (user == "r" && computer == "r" || user == "p" && computer == "p" || user == "s" && computer == "s"){
-    document.getElementById("game-result").innerHTML = "Nobody wins, it's a tie!"
+    logResult("Nobody wins, it's a tie!"); 
 } else if (user == "r" && computer == "s" || user == "p" && computer == "r" || user == "s" && computer == "p" ){
-    document.getElementById("game-result").innerHTML = "You win!"
+    logResult("You win!");
 } else if (user == "r" && computer == "p" || user == "p" && computer == "s" || user == "s" && computer == "r"){
-    document.getElementById("game-result").innerHTML = "Computer wins!"
+    logResult("Computer wins!");
+} else {
+    logResult("Please check your input, did you choose rock, paper, or scissors (or r, p, s)?")
 }
 
 </script>
